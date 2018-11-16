@@ -9,8 +9,6 @@ CREATE TABLE restaurant
 
   id INT(11) NOT NULL AUTO_INCREMENT,
   name VARCHAR(100) NOT NULL,
-  availableTable INT(11) NOT NULL,
-  totalTable INT(11) NOT NULL,
   PRIMARY KEY (id)
 
 );

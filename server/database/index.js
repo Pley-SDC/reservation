@@ -6,7 +6,7 @@ const connection = mysql.createConnection({
   database: 'reservation_hour',
 });
 
-connection.connect();
+// connection.connect();
 
 connection.getReservations = (id, callback) => {
   const query = `
@@ -38,8 +38,30 @@ connection.getHours = (id, callback) => {
   });
 };
 
-// connection.addReservation = (id, result) => {
-//   const query = `insert into reservation (reservee, time, restaurantd) values()`;
-// };
+connection.addReservation = (id, req, callback) => {
+  const query = 'insert into reservation (reservee, time, restaurantId) values(?,?,?)';
+  connection.query(query, [req.body.reservee, req.body.time, id], (err) => {
+    if (err) {
+      callback(err, null);
+    }
+    callback(null);
+  });
+};
+
+connection.deleteReservation = (id, callback) => {
+  const query = 'delete from reservation where id = ?';
+  connection.query(query, [id], (err) => {
+    if (err) callback(err);
+    callback(null);
+  });
+};
+
+connection.updateReservation = (id, time, callback) => {
+  const query = 'update reservation set time = ? where id = ?';
+  connection.query(query, [time, id], (err) => {
+    if (err) callback(err);
+    callback(null);
+  });
+};
 
 module.exports = connection;

@@ -24,3 +24,7 @@ coverage
 build/
 dist/
 
+server/database/restaurant.csv
+
+server/database/reservation.csv
+hour.csv

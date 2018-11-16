@@ -1,16 +1,12 @@
-# Project Name
+# Pley
 
-> Front End Capstone (FEC) project. Module displays reservation table with time and number of guests. It also includes hours of operation of the restaurant and shows if the restaurant is open now.
+>Module displays reservation table with time and number of guests. It also includes hours of operation of the restaurant and shows if the restaurant is open now.
 
 ![alt text](https://i.imgur.com/lEWUORR.jpg)
 ![alt text](https://i.imgur.com/DjBp7ox.jpg)
 
 ## Related Projects
 
-  - https://github.com/YumpSF/popular-dishes-and-full-menu
-  - https://github.com/YumpSF/overview
-  - https://github.com/YumpSF/Recommended-Reviews-Module
-  - https://github.com/YumpSF/proxy-david
 
 ## Table of Contents
 

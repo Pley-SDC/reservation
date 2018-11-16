@@ -32,7 +32,7 @@ app.get('/api/:restaurant_id/hour', (req, res) => {
 
 app.post('/api/:restaurant_id/reservation', (req, res) => {
   const restaurantId = req.params.restaurant_id;
-  db.addReservation(restaurantId, (err) => {
+  db.addReservation(restaurantId, req, (err) => {
     if (err) res.status(500).send(err);
     res.sendStatus(201);
   });
@@ -48,7 +48,8 @@ app.delete('/api/:restaurant_id/reservation', (req, res) => {
 
 app.put('/api/:restaurant_id/reservation', (req, res) => {
   const id = req.body.reservation_id;
-  db.updateReservation(id, (err) => {
+  const { time } = req.body;
+  db.updateReservation(id, time, (err) => {
     if (err) res.status(500).send(err);
     res.send();
   });
