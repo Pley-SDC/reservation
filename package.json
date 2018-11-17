@@ -11,7 +11,7 @@
     "build": "webpack",
     "start": "nodemon server/app.js",
     "db": "mysql -u root < server/schema.sql",
-    "seed": "node server/database/seed.js",
+    "generate": "node server/database/generateHour.js; node server/database/generateRestaurant.js; node server/database/generateReservation.js",
     "test": "jest --coverage"
   },
   "dependencies": {
