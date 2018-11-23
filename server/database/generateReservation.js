@@ -4,12 +4,12 @@ const fs = require('fs');
 
 const generateReservation = () => {
   const stream = fs.createWriteStream('./server/database/reservation.csv');
-  stream.write('id,reservee,time,restaurantId\n');
+  stream.write('reservee,time,restaurantId\n');
   let i = 0;
   const write = () => {
     while (i < 100000000) {
       i += 1;
-      const restId = Math.floor(Math.random() * 100);
+      const restId = Math.floor(Math.random() * 10000000);
       const randomReservee = `${faker.name.findName()}`;
       const randomReservation = faker.date.future(0.05);
       let randomTime = parseInt(12 + (Math.random() * 10), 10);
@@ -19,7 +19,7 @@ const generateReservation = () => {
         randomTime += ':00:00';
       }
       randomTime = `${moment(randomReservation).format('YYYY-MM-DD')} ${randomTime}`;
-      if (!stream.write(`${i},${randomReservee},${randomTime},${restId}\n`)) {
+      if (!stream.write(`${randomReservee},${randomTime},${restId}\n`)) {
         return;
       }
       if (i % 10000000 === 0) {

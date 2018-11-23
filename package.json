@@ -11,7 +11,7 @@
     "build": "webpack",
     "start": "nodemon server/app.js",
     "db": "mysql -u root < server/schema.sql",
-    "generate": "node server/database/generateHour.js; node server/database/generateRestaurant.js; node server/database/generateReservation.js",
+    "generate": "node server/database/generateRestaurant.js; node server/database/generateReservation.js",
     "test": "jest --coverage"
   },
   "dependencies": {
@@ -21,6 +21,7 @@
     "faker": "^4.1.0",
     "moment": "^2.22.2",
     "mysql": "^2.16.0",
+    "pg": "^7.6.1",
     "prop-types": "^15.6.2",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",

@@ -16,7 +16,7 @@ CREATE TABLE restaurant
 CREATE TABLE reservation
 (
 
-  id serial,
+  id bigserial,
   reservee VARCHAR(50) NOT NULL,
   time text NOT NULL,
   restaurantId integer NOT NULL,
@@ -38,4 +38,4 @@ CREATE TABLE hour
 
 copy hour from  '/Users/inhyub/Desktop/SDC/reservation-hours/server/database/hour.csv' delimiters ',' csv header;
 copy restaurant from '/Users/inhyub/Desktop/SDC/reservation-hours/server/database/restaurant.csv' delimiters ',' csv header;
-copy reservation from '/Users/inhyub/Desktop/SDC/reservation-hours/server/database/reservation.csv' delimiters ',' csv header;
+copy reservation (reservee, time, restaurantid) from '/Users/inhyub/Desktop/SDC/reservation-hours/server/database/reservation.csv' delimiters ',' csv header;

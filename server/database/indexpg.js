@@ -1,65 +1,75 @@
-const mysql = require('mysql');
+const { Client } = require('pg');
 
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  database: 'reservation_hour',
+const client = new Client({
+  database: 'reservations',
 });
-
-// connection.connect();
+const connection = {};
 
 connection.getReservations = (id, callback) => {
+  client.connect();
   const query = `
     SELECT reservation.reservee,reservation.time,restaurant.name FROM reservation 
     INNER JOIN restaurant ON reservation.restaurantId = restaurant.id
     WHERE restaurantId = ${id}
   `;
-  connection.query(query, (err, result) => {
+  client.query(query, (err, result) => {
     if (err) {
       callback(err, null);
     } else {
       callback(null, result);
     }
+    client.end();
   });
 };
 
 connection.getHours = (id, callback) => {
+  client.connect();
   const query = `
     SELECT hour.weekday,hour.openingHour,hour.closingHour,restaurant.name FROM hour
     INNER JOIN restaurant ON hour.restaurantId = restaurant.id
     WHERE restaurantId = ${id}
   `;
-  connection.query(query, (err, result) => {
+  client.query(query, (err, result) => {
     if (err) {
       callback(err, null);
     } else {
       callback(null, result);
     }
+    client.end();
   });
 };
 
 connection.addReservation = (id, req, callback) => {
-  const query = 'insert into reservation (reservee, time, restaurantId) values(?,?,?)';
-  connection.query(query, [req.body.reservee, req.body.time, id], (err) => {
-    if (err) callback(err, null);
-    else callback(null);
+  client.connect();
+  const query = `insert into reservation (reservee, time, restaurantId) values('${req.body.reservee}','${req.body.time}', ${id})`;
+  client.query(query, (err) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null);
+    }
+    client.end();
   });
 };
 
 connection.deleteReservation = (id, callback) => {
-  const query = 'delete from reservation where id = ?';
-  connection.query(query, [id], (err) => {
+  client.connect();
+  const query = `delete from reservation where id = ${id}`;
+  client.query(query, (err) => {
     if (err) callback(err);
     else callback(null);
+    client.end();
   });
 };
 
 connection.updateReservation = (id, time, callback) => {
-  const query = 'update reservation set time = ? where id = ?';
-  connection.query(query, [time, id], (err) => {
+  client.connect();
+  const query = `update reservation set time = '${time}' where id = ${id}`;
+  client.query(query, (err) => {
     if (err) callback(err);
     else callback(null);
+    client.end();
   });
 };
 
-// module.exports = connection;
+module.exports = connection;
