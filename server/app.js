@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express');
-const db = require('./database');
+const db = require('./database/indexpg.js');
 
 const app = express();
 
@@ -33,8 +33,11 @@ app.get('/api/:restaurant_id/hour', (req, res) => {
 app.post('/api/:restaurant_id/reservation', (req, res) => {
   const restaurantId = req.params.restaurant_id;
   db.addReservation(restaurantId, req, (err) => {
-    if (err) res.status(500).send(err);
-    res.sendStatus(201);
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.sendStatus(201);
+    }
   });
 });
 
@@ -42,7 +45,7 @@ app.delete('/api/:restaurant_id/reservation', (req, res) => {
   const id = req.body.reservation_id;
   db.deleteReservation(id, (err) => {
     if (err) res.status(500).send(err);
-    res.send();
+    else res.send();
   });
 });
 
@@ -51,7 +54,7 @@ app.put('/api/:restaurant_id/reservation', (req, res) => {
   const { time } = req.body;
   db.updateReservation(id, time, (err) => {
     if (err) res.status(500).send(err);
-    res.send();
+    else res.send();
   });
 });
 
