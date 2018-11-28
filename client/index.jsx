@@ -62,8 +62,8 @@ class App extends Component {
           .then((result) => {
             const hours = result.data.map(weekday => (
               Object.assign({}, weekday, {
-                opening_hour: weekday.openingHour.slice(0, 5),
-                closing_hour: weekday.closingHour.slice(0, 5),
+                opening_hour: weekday.openinghour,
+                closing_hour: weekday.closinghour,
               })
             ));
             this.setState({

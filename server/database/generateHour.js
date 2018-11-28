@@ -15,7 +15,7 @@ const generateHour = () => {
         k += 1;
       }
       let openingHour = 6 + Math.floor(Math.random() * 5);
-      if (openingHour > 10) {
+      if (openingHour < 10) {
         openingHour = `0${openingHour}`;
       }
       if (Math.random() >= 0.5) {
@@ -23,10 +23,7 @@ const generateHour = () => {
       } else {
         openingHour += ':00';
       }
-      let closingHour = 21 + Math.floor(Math.random() * 5);
-      if (closingHour > 24) {
-        closingHour -= 24;
-      }
+      let closingHour = 21 + Math.floor(Math.random() * 4);
       if (Math.random() >= 0.5) {
         closingHour += ':30';
       } else {
